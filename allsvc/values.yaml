@@ -1,0 +1,83 @@
+pullPolicy: Always
+app:
+  replicas: 1
+  env1: backsvc
+  env2: frontsvc
+  env3: dbsvc
+  container:
+    name1: backendcontainer
+    image1: mehmuud/newbackend:latest
+    name2: frontendcontainer
+    image2: mehmuud/newfrontend:latest 
+    name3: mongodb
+    image3: mongo
+  ports:
+    containerPort1: 80
+    containerPort2: 3000 
+    containerPort3: 27017
+  computerc:
+#Service specification.
+spec:
+  ports:
+    port1: 31000
+    port2: 30000
+    port3: 32500
+    nodePort1: 31000
+    nodePort2: 30000
+    nodePort3: 32500
+    protocol: TCP
+    targetPort1: 80
+    targetPort2: 3000
+    targetPort3: 27017
+  selector:
+    app1: backsvc
+    app2: frontsvc
+    app3: dbsvc
+  sessionAffinity: None
+  type: LoadBalancer
+  type2: ClusterIP
+#Horizontel pod autoscaling specification.
+hpa:
+  enabled: false
+metadatahpa:
+  annotations:
+    app1: backsvc
+    app2: frontsvc
+    app3: dbsvc
+    env: dev
+hpa-spec:
+   maxReplicas: 8
+   minReplicas: 4
+   scaleTargetRef:
+     name: demo-app
+     targetCPUUtilizationPercentage: 50  
+#service-name   
+metadata:
+   name1: backsvc
+   name2: frontsvc
+   name3: dbsvc
+#Deployment specification.
+deploymentname:
+  metadata:
+     name1: back-deployment
+     name2: front-deployment
+     name3: db-deployment
+depspec:
+  selector:
+     matchLabels:
+        app1: backsvc
+        app2: frontsvc
+        app3: dbsvc
+apphelper:
+  app1: backsvc
+  app2: frontsvc
+  app3: dbsvc
+
+ 
+configmap:
+  mapkey:
+    name: mehmoodmap
+    namespace: mehmood
+    varname: DB_STRING1
+    varvalue: "'mongodb://192.168.217.131:32500/course-goals'"
+

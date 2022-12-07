@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Values.configmap.mapkey.name}}
+  namespace: {{.Values.configmap.mapkey.namespace}}
+data:
+  {{.Values.configmap.mapkey.varname}}: {{.Values.configmap.mapkey.varvalue | quote }}

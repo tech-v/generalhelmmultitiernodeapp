@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.metadata.name1}}
+spec:
+  ports:
+  - port: {{ .Values.spec.ports.port1}}
+    nodePort: {{ .Values.spec.ports.nodePort1}}
+    protocol: {{ .Values.spec.ports.protocol}}
+    targetPort: {{ .Values.spec.ports.targetPort1}}
+  selector:
+    app: {{ .Values.spec.selector.app1}}
+  sessionAffinity: {{ .Values.spec.sessionAffinity}}
+  type: {{ .Values.spec.type}}
+status:
+  loadBalancer: {}

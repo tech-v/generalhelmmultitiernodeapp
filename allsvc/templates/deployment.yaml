@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:        
+    rollme: {{ randAlphaNum 5 | quote }}
+  name: {{.Values.deploymentname.metadata.name1}}
+spec:
+  replicas: {{.Values.app.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.depspec.selector.matchLabels.app1}}
+  template:
+    metadata:
+      annotations:        
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+      {{- include "demo.labels1" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{.Values.app.container.name1}}
+          image: {{.Values.app.container.image1}}
+          ports:
+            - containerPort: {{.Values.app.ports.containerPort1}}
+          env:
+        # Define the environment variable
+            - name: {{.Values.configmap.mapkey.varname}} # Notice that the case is different here
+              valueFrom:
+                configMapKeyRef:
+                  name: {{.Values.configmap.mapkey.name}}           # The ConfigMap this value comes from.
+                  key: {{.Values.configmap.mapkey.varname | quote }}   # The key to fetch.
