@@ -25,3 +25,15 @@ spec:
           {{- toYaml .Values.app.computerc | nindent 12}}
           ports:
             - containerPort: {{.Values.app.ports.containerPort2}}
+          env:
+        # Define the environment variable
+            - name: {{.Values.configmap.mapkey.varname1}} # Notice that the case is different here
+              valueFrom:
+                configMapKeyRef:
+                  name: {{.Values.configmap.mapkey.name}}           # The ConfigMap this value comes from.
+                  key: {{.Values.configmap.mapkey.varname1}}   # The key to fetch.
+            - name: {{.Values.configmap.mapkey.varname2}} # Notice that the case is different here
+              valueFrom:
+                configMapKeyRef:
+                  name: {{.Values.configmap.mapkey.name}}           # The ConfigMap this value comes from.
+                  key: {{.Values.configmap.mapkey.varname2}}   # The key to fetch.

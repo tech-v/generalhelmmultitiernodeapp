@@ -5,3 +5,5 @@ metadata:
   namespace: {{.Values.configmap.mapkey.namespace}}
 data:
   {{.Values.configmap.mapkey.varname}}: {{.Values.configmap.mapkey.varvalue | quote }}
+  {{.Values.configmap.mapkey.varname1}}: {{.Values.configmap.mapkey.varvalue1 | quote }}
+  {{.Values.configmap.mapkey.varname2}}: {{.Values.configmap.mapkey.varvalue2 | quote }}
